@@ -33,7 +33,7 @@ module.exports = defineConfig({
     },
     env: {
       apiBaseUrl: 'https://reqres.in/api',
-      apiKey: process.env.REQRES_API_KEY || 'Chave_Segura',
+      apiKey: process.env.REQRES_API_KEY,
       apiTimeout: 10000
     }
   }

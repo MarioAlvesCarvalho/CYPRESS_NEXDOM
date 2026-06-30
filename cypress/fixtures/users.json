@@ -1,0 +1,43 @@
+{
+  "validUser": {
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "description": "Usuário padrão com acesso completo"
+  },
+  "lockedUser": {
+    "username": "locked_out_user",
+    "password": "secret_sauce",
+    "description": "Usuário bloqueado - deve exibir erro"
+  },
+  "problemUser": {
+    "username": "problem_user",
+    "password": "secret_sauce",
+    "description": "Usuário com problemas visuais na aplicação"
+  },
+  "invalidCredentials": [
+    {
+      "username": "",
+      "password": "",
+      "expectedError": "Epic sadface: Username is required",
+      "scenario": "Campos vazios"
+    },
+    {
+      "username": "standard_user",
+      "password": "",
+      "expectedError": "Epic sadface: Password is required",
+      "scenario": "Senha vazia"
+    },
+    {
+      "username": "",
+      "password": "secret_sauce",
+      "expectedError": "Epic sadface: Username is required",
+      "scenario": "Usuário vazio"
+    },
+    {
+      "username": "invalid_user",
+      "password": "wrong_pass",
+      "expectedError": "Epic sadface: Username and password do not match any user in this service",
+      "scenario": "Credenciais inválidas"
+    }
+  ]
+}

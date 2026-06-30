@@ -1,0 +1,37 @@
+{
+  "newUser": {
+    "name": "Mário Carvalho",
+    "job": "QA Senior"
+  },
+  "updatedUser": {
+    "name": "Mário Carvalho",
+    "job": "Head QA Automation"
+  },
+  "registerSuccess": {
+    "email": "eve.holt@reqres.in",
+    "password": "pistol"
+  },
+  "registerFail": {
+    "email": "sydney@fife"
+  },
+  "loginSuccess": {
+    "email": "eve.holt@reqres.in",
+    "password": "cityslicka"
+  },
+  "loginFail": {
+    "email": "peter@klaven"
+  },
+  "userSchema": {
+    "id": "number",
+    "email": "string",
+    "first_name": "string",
+    "last_name": "string",
+    "avatar": "string"
+  },
+  "userListSchema": {
+    "page": "number",
+    "per_page": "number",
+    "total": "number",
+    "total_pages": "number"
+  }
+}

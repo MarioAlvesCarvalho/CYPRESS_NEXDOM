@@ -1,0 +1,30 @@
+{
+  "name": "qa-NEXDOM",
+  "version": "1.0.0",
+  "description": "Desafio Tecnico QA Sênior",
+  "author": "Mario Carvalho",
+  "license": "MIT",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:api": "cypress run --spec 'cypress/e2e/api/**/*.cy.js'",
+    "cy:run:ui": "cypress run --spec 'cypress/e2e/ui/**/*.cy.js'",
+    "cy:run:all": "cypress run --spec 'cypress/e2e/**/*.cy.js'",
+    "report:merge": "mochawesome-merge cypress/reports/json/*.json -o cypress/reports/merged-report.json",
+    "report:generate": "marge cypress/reports/merged-report.json -f report -o cypress/reports/html --inline",
+    "report:clean": "rm -rf cypress/reports",
+    "report": "npm run report:merge && npm run report:generate",
+    "test": "npm run report:clean && npm run cy:run:all && npm run report",
+    "test:api": "npm run report:clean && npm run cy:run:api && npm run report",
+    "test:ui": "npm run report:clean && npm run cy:run:ui && npm run report",
+    "perf:test": "k6 run performance/load-test.js",
+    "perf:test:smoke": "k6 run --vus 1 --duration 10s performance/load-test.js"
+  },
+  "devDependencies": {
+    "cypress": "^13.13.0",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.3.0",
+    "mochawesome-report-generator": "^6.2.0",
+    "cypress-plugin-api": "^2.11.1"
+  }
+}

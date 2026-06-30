@@ -9,7 +9,7 @@
  * @param {object} body - Body da requisição (opcional)
  * @param {object} options - Opções adicionais (headers, failOnStatusCode, etc.)
  */
-Cypress.Commands.add('apiRequest', (method, endpoint, body = null, options = {}) => {
+CCypress.Commands.add('apiRequest', (method, endpoint, body = null, options = {}) => {
   const baseUrl = Cypress.env('apiBaseUrl');
 
   const requestOptions = {
@@ -27,7 +27,17 @@ Cypress.Commands.add('apiRequest', (method, endpoint, body = null, options = {})
     requestOptions.body = body;
   }
 
-  return cy.wait(1000).request(requestOptions);
+  const makeRequest = (attempt = 1) => {
+    return cy.wait(2000).request(requestOptions).then((response) => {
+      if (response.status === 429 && attempt <= 3) {
+        cy.log(`Rate limit (429) - tentativa ${attempt}/3, aguardando retry...`);
+        return cy.wait(5000).then(() => makeRequest(attempt + 1));
+      }
+      return response;
+    });
+  };
+
+  return makeRequest();
 });
 
 /**

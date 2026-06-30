@@ -8,47 +8,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  api-tests:
-    name: Testes de API
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout do código
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Instalar dependências
-        run: npm ci
-
-      - name: Executar testes de API
-        run: npx cypress run --spec 'cypress/e2e/api/**/*.cy.js'
-        env:
-          REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
-
-      - name: Gerar relatório
-        if: always()
-        run: npm run report
-
-      - name: Upload relatório de API
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: api-test-report
-          path: cypress/reports/html/
-          retention-days: 30
-
-      - name: Upload screenshots (se houver falha)
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: api-test-screenshots
-          path: cypress/screenshots/
-          retention-days: 15
-
   ui-tests:
     name: Testes de UI
     runs-on: ubuntu-latest
@@ -67,8 +26,6 @@ jobs:
 
       - name: Executar testes de UI
         run: npx cypress run --spec 'cypress/e2e/ui/**/*.cy.js'
-        env:
-          REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
 
       - name: Gerar relatório
         if: always()
@@ -93,7 +50,7 @@ jobs:
   performance-tests:
     name: Testes de Performance
     runs-on: ubuntu-latest
-    needs: [api-tests]
+    needs: [ui-tests]
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4

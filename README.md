@@ -292,9 +292,21 @@ O pipeline está configurado em `.github/workflows/ci.yml` e é acionado em:
 
 | Job | Descrição | Execução |
 |---|---|---|
-| `api-tests` | Testes de API com Cypress | Paralelo com UI |
-| `ui-tests` | Testes de UI com Cypress | Paralelo com API |
-| `performance-tests` | Testes de performance com k6 | Após API tests |
+| `ui-tests` | Testes de UI com Cypress | Primeiro job |
+| `performance-tests` | Testes de performance com k6 | Após UI tests |
+
+### Por que os testes de API não estão na pipeline?
+
+Os testes de API utilizam a Reqres.in, que no plano gratuito aplica rate limit agressivo (HTTP 429) para requisições originadas de IPs compartilhados de provedores de CI/CD como o GitHub Actions. Mesmo com estratégias de retry e delay entre requisições, o rate limit persiste no ambiente de CI.
+
+Por esse motivo, os testes de API devem ser executados **localmente**, onde funcionam sem restrições. Essa é uma limitação conhecida de APIs públicas gratuitas em ambientes de integração contínua.
+
+```bash
+# Executar testes de API localmente
+npm run test:api
+```
+
+Em um cenário real com APIs internas ou com planos pagos, os testes de API seriam integrados normalmente à pipeline.
 
 ### Artefatos
 
@@ -302,10 +314,6 @@ Os seguintes artefatos são salvos na pipeline:
 - **Relatórios Mochawesome** — HTML interativo (30 dias)
 - **Screenshots de falha** — Evidências visuais (15 dias)
 - **Resultado k6** — JSON com métricas (30 dias)
-
-### Execução Paralela
-
-Os jobs de API e UI rodam em paralelo para reduzir o tempo total da pipeline. Os testes de performance rodam após os testes de API como dependência.
 
 ---
 
@@ -338,6 +346,7 @@ Este projeto utilizou IA (Claude, da Anthropic) como ferramenta de apoio em pont
 7. **Paralelismo no Cypress** — Usar Cypress Cloud ou `sorry-cypress` para execução distribuída
 
 ---
+
 ## 👤 Autor
 
 **Mário Carvalho**

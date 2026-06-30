@@ -27,7 +27,7 @@ Cypress.Commands.add('apiRequest', (method, endpoint, body = null, options = {})
     requestOptions.body = body;
   }
 
-  return cy.request(requestOptions);
+  return cy.wait(500).request(requestOptions);
 });
 
 /**

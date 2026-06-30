@@ -9,7 +9,7 @@
  * @param {object} body - Body da requisição (opcional)
  * @param {object} options - Opções adicionais (headers, failOnStatusCode, etc.)
  */
-CCypress.Commands.add('apiRequest', (method, endpoint, body = null, options = {}) => {
+Cypress.Commands.add('apiRequest', (method, endpoint, body = null, options = {}) => {
   const baseUrl = Cypress.env('apiBaseUrl');
 
   const requestOptions = {

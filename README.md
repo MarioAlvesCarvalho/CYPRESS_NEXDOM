@@ -357,3 +357,4 @@ Head QA Automation
 [LinkedIn](https://linkedin.com/in/marioascarvalho)
 
 [Repositório do Projeto](https://github.com/MarioAlvesCarvalho/CYPRESS_NEXDOM.git)
+

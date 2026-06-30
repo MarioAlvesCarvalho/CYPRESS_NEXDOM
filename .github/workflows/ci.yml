@@ -67,9 +67,7 @@ jobs:
 
       - name: Executar testes de performance
         run: k6 run performance/load-test.js
-        env:
-          REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
-
+        
       - name: Upload resultado de performance
         if: always()
         uses: actions/upload-artifact@v4

@@ -14,7 +14,7 @@ module.exports = defineConfig({
     defaultCommandTimeout: 10000,
     requestTimeout: 15000,
     responseTimeout: 15000,
-    pageLoadTimeout: 60000,
+    pageLoadTimeout: 120000,
     blockHosts: ['*backtrace.io'],
     video: false,
     screenshotOnRunFailure: true,

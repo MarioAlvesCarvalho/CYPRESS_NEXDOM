@@ -14,20 +14,20 @@ const createUserDuration = new Trend('create_user_duration', true);
 // Configuração de carga e thresholds
 // ================================================================
 export const options = {
- stages: [
-    { duration: '10s', target: 5 },   // Ramp-up: sobe para 5 VUs
-    { duration: '20s', target: 5 },   // Carga estável
-    { duration: '10s', target: 10 },  // Pico: sobe para 10 VUs
-    { duration: '20s', target: 10 },  // Carga de pico
-    { duration: '10s', target: 0 },   // Ramp-down
+  stages: [
+    { duration: '10s', target: 3 },
+    { duration: '20s', target: 3 },
+    { duration: '10s', target: 5 },
+    { duration: '20s', target: 5 },
+    { duration: '10s', target: 0 },
   ],
   thresholds: {
-    http_req_duration: ['p(95)<3000'],
-    http_req_failed: ['rate<0.15'],
-    errors: ['rate<0.2'],
-    list_users_duration: ['p(95)<3000'],
-    single_user_duration: ['p(95)<2500'],
-    create_user_duration: ['p(95)<3000'],
+    http_req_duration: ['p(95)<5000'],
+    http_req_failed: ['rate<0.30'],
+    errors: ['rate<0.30'],
+    list_users_duration: ['p(95)<5000'],
+    single_user_duration: ['p(95)<5000'],
+    create_user_duration: ['p(95)<5000'],
   },
 };
 

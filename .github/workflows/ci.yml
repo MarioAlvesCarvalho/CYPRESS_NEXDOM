@@ -8,9 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-    # Job 1: Testes de API
-    api-tests:
-    name: 🔌 Testes de API
+  api-tests:
+    name: Testes de API
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do código
@@ -50,9 +49,8 @@ jobs:
           path: cypress/screenshots/
           retention-days: 15
 
-    # Job 2: Testes de UI
-    ui-tests:
-    name: 🖥️ Testes de UI
+  ui-tests:
+    name: Testes de UI
     runs-on: ubuntu-latest
     steps:
       - name: Checkout do código
@@ -92,9 +90,8 @@ jobs:
           path: cypress/screenshots/
           retention-days: 15
 
-    # Job 3: Testes de Performance
-    performance-tests:
-    name: ⚡ Testes de Performance
+  performance-tests:
+    name: Testes de Performance
     runs-on: ubuntu-latest
     needs: [api-tests]
     steps:
